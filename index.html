@@ -1033,12 +1033,20 @@ function renderPosts() {
 
                     </div>
 
-                    <button
-                        class="delete-button"
-                        onclick="deletePost('${postId}')"
-                    >
-                        Delete
-                    </button>
+                    ${
+    			post.username === currentUsername
+    			?
+    			`
+ 		        <button
+        		    class="delete-button"
+                            onclick="deletePost('${postId}')"
+                        >
+                            Delete
+                        </button>
+    			`
+    			:
+    			""
+	            }
 
                 </div>
 
@@ -1737,35 +1745,32 @@ function loadComments(
 
 
 /* =====================================================
-   DELETE POST
+   DELETE POST - OWNER ONLY
 ===================================================== */
 
-window.deletePost = async function(
-    postId
-) {
+window.deletePost = async function(postId) {
 
-    const post =
-        posts[postId];
+    const post = posts[postId];
 
     if (!post) return;
 
+    // Make sure a username is set
+    if (!currentUsername) {
+        alert("Please set your username first.");
+        return;
+    }
 
-    /*
-       For this simple school-project version,
-       anyone can press Delete.
+    // ONLY the person who created the post can delete it
+    if (post.username !== currentUsername) {
+        alert("You can only delete your own post.");
+        return;
+    }
 
-       If you want ONLY YOU to be able to delete
-       posts, we can add Firebase Authentication
-       and an admin account.
-    */
-
-    const confirmed =
-        confirm(
-            "Delete this post permanently?"
-        );
+    const confirmed = confirm(
+        "Delete your post permanently?"
+    );
 
     if (!confirmed) return;
-
 
     try {
 
@@ -1789,7 +1794,6 @@ window.deletePost = async function(
     }
 
 };
-
 
 /* =====================================================
    UTILITIES
