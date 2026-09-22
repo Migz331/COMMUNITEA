@@ -1,45 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Interactive Social Feed</title>
+<title>404 — Social Feed</title>
 
 <style>
-
-/* =========================
-   GENERAL
-========================= */
-
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 body {
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background: #f5f7f9;
-    color: #17202a;
+    color: #14171a;
 }
-
-
-/* =========================
-   MAIN APP
-========================= */
 
 .app {
+    width: 100%;
     max-width: 700px;
-    margin: 30px auto;
+    margin: auto;
     background: white;
     min-height: 100vh;
-
-    border-left: 1px solid #e1e8ed;
-    border-right: 1px solid #e1e8ed;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
-
 
 /* =========================
    HEADER
@@ -49,40 +36,51 @@ body {
     position: sticky;
     top: 0;
     z-index: 20;
-
-    background: rgba(255,255,255,0.96);
+    background: rgba(255,255,255,0.95);
     backdrop-filter: blur(10px);
-
-    padding: 18px 22px;
-
-    border-bottom: 1px solid #e1e8ed;
+    border-bottom: 1px solid #ddd;
+    padding: 16px 20px;
 }
 
-.header h1 {
-    font-size: 21px;
-    font-weight: 800;
+.header h2 {
+    margin: 0;
+    font-size: 20px;
 }
-
 
 /* =========================
-   USERNAME BOX
+   STATUS
+========================= */
+
+.status {
+    padding: 8px 20px;
+    font-size: 12px;
+    color: #777;
+    border-bottom: 1px solid #eee;
+}
+
+.status.online {
+    color: #159447;
+}
+
+.status.error {
+    color: #d62828;
+}
+
+/* =========================
+   USERNAME
 ========================= */
 
 .username-box {
-    padding: 18px 20px;
-
-    border-bottom: 1px solid #e1e8ed;
-
-    background: #f8fafc;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #ddd;
 }
 
 .username-box label {
-    display: block;
-
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
-
-    margin-bottom: 8px;
+    display: block;
+    margin-bottom: 6px;
 }
 
 .username-row {
@@ -92,218 +90,104 @@ body {
 
 .username-row input {
     flex: 1;
-
-    border: 1px solid #cfd9de;
-
-    border-radius: 999px;
-
-    padding: 11px 15px;
-
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     outline: none;
-
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .username-row input:focus {
-    border-color: #1d9bf0;
+    border-color: #111;
 }
 
 .username-row button {
     border: none;
-
-    background: #1d9bf0;
+    background: #111;
     color: white;
-
-    padding: 10px 18px;
-
-    border-radius: 999px;
-
-    font-weight: bold;
-
+    padding: 10px 15px;
+    border-radius: 8px;
     cursor: pointer;
-}
-
-.username-row button:hover {
-    background: #1689d4;
+    font-weight: bold;
 }
 
 .current-user {
     margin-top: 8px;
-
     font-size: 13px;
-
-    color: #657786;
+    color: #555;
 }
-
 
 /* =========================
    COMPOSER
 ========================= */
 
 .composer {
-    display: flex;
-    gap: 12px;
-
-    padding: 20px;
-
-    border-bottom: 1px solid #e1e8ed;
-}
-
-.avatar {
-    width: 48px;
-    height: 48px;
-
-    min-width: 48px;
-
-    border-radius: 50%;
-
-    background: linear-gradient(
-        135deg,
-        #667eea,
-        #764ba2
-    );
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-
-    font-weight: bold;
-
-    overflow: hidden;
-}
-
-.composer-content {
-    flex: 1;
+    padding: 18px 20px;
+    border-bottom: 1px solid #ddd;
 }
 
 textarea {
     width: 100%;
-
+    min-height: 80px;
+    resize: vertical;
     border: none;
-
-    resize: none;
-
     outline: none;
-
-    font-size: 20px;
-
+    font-size: 16px;
     font-family: inherit;
-
-    min-height: 75px;
 }
 
 .composer-bottom {
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
+    margin-top: 10px;
 }
 
-.counter {
-    font-size: 13px;
+.photo-label {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
 
-    color: #657786;
+input[type="file"] {
+    display: none;
 }
 
 .post-button {
-    border: none;
-
-    background: #1d9bf0;
-
+    background: #111;
     color: white;
-
-    font-weight: bold;
-
-    padding: 10px 22px;
-
-    border-radius: 999px;
-
+    border: none;
+    border-radius: 20px;
+    padding: 9px 20px;
     cursor: pointer;
-}
-
-.post-button:hover {
-    background: #1689d4;
+    font-weight: bold;
 }
 
 .post-button:disabled {
     opacity: 0.5;
-
     cursor: not-allowed;
 }
 
-
-/* =========================
-   PHOTO BUTTON
-========================= */
-
-.media-options {
-    margin: 8px 0;
-}
-
-.photo-button {
-    display: inline-block;
-
-    color: #1d9bf0;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    font-size: 14px;
-}
-
-.photo-button:hover {
-    text-decoration: underline;
-}
-
-
-/* =========================
-   PHOTO PREVIEW
-========================= */
-
-.photo-preview-container {
-    margin-top: 10px;
-
-    position: relative;
-
-    display: inline-block;
-}
-
 .photo-preview {
+    display: none;
+    margin-top: 10px;
+}
+
+.photo-preview img {
     max-width: 100%;
-
     max-height: 300px;
-
-    border-radius: 15px;
-
+    border-radius: 12px;
     display: block;
 }
 
 .remove-photo {
-    position: absolute;
-
-    top: 8px;
-    right: 8px;
-
-    width: 30px;
-    height: 30px;
-
+    margin-top: 6px;
     border: none;
-
-    border-radius: 50%;
-
-    background: rgba(0,0,0,0.7);
-
-    color: white;
-
+    background: #eee;
+    padding: 6px 10px;
+    border-radius: 6px;
     cursor: pointer;
-
-    font-size: 16px;
 }
-
 
 /* =========================
    POSTS
@@ -311,85 +195,58 @@ textarea {
 
 .post {
     padding: 18px 20px;
-
-    border-bottom: 1px solid #e1e8ed;
-
-    display: flex;
-
-    gap: 12px;
-
-    transition: background 0.2s;
-}
-
-.post:hover {
-    background: #f8fafc;
-}
-
-.post-body {
-    flex: 1;
-
-    min-width: 0;
+    border-bottom: 1px solid #ddd;
 }
 
 .post-header {
     display: flex;
-
+    gap: 10px;
     align-items: center;
+}
 
-    gap: 5px;
-
-    margin-bottom: 4px;
-
-    flex-wrap: wrap;
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #111;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
 }
 
 .name {
-    font-weight: 800;
+    font-weight: bold;
 }
 
 .username {
     color: #657786;
+    margin-left: 5px;
 }
 
-.verified {
-    color: #1d9bf0;
-
-    font-size: 14px;
-}
-
-.time {
+.post-time {
     color: #657786;
+    font-size: 12px;
+    margin-left: 5px;
 }
 
 .post-text {
-    font-size: 16px;
-
-    line-height: 1.45;
-
+    margin-top: 12px;
     white-space: pre-wrap;
-
     word-wrap: break-word;
+    line-height: 1.45;
 }
-
-
-/* =========================
-   POST IMAGE
-========================= */
 
 .post-image {
     width: 100%;
-
     max-height: 500px;
-
     object-fit: contain;
-
-    border-radius: 15px;
-
-    margin-top: 10px;
-
-    display: block;
+    margin-top: 12px;
+    border-radius: 12px;
+    background: #f5f5f5;
 }
-
 
 /* =========================
    ACTIONS
@@ -397,238 +254,192 @@ textarea {
 
 .actions {
     display: flex;
-
     justify-content: space-between;
-
     max-width: 500px;
-
-    margin-top: 14px;
+    margin-top: 15px;
 }
 
-.action {
+.action-btn {
+    background: none;
     border: none;
-
-    background: transparent;
-
-    color: #657786;
-
     cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 6px;
-
+    color: #657786;
     font-size: 14px;
+    padding: 6px;
 }
 
-.action:hover {
-    color: #1d9bf0;
+.action-btn:hover {
+    color: #111;
 }
 
-.action.liked {
+.liked {
     color: #e0245e;
 }
 
-.action.reposted {
+.reposted {
     color: #17bf63;
 }
-
 
 /* =========================
    COMMENTS
 ========================= */
 
 .comments {
-    margin-top: 14px;
-
     display: none;
+    margin-top: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
 }
 
-.comments.show {
-    display: block;
+.comment {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
 }
 
-.comment-input {
+.comment-header {
     display: flex;
-
     gap: 8px;
-
     align-items: center;
 }
 
-.comment-input input[type="text"] {
-    flex: 1;
-
-    min-width: 0;
-
-    border: 1px solid #cfd9de;
-
-    border-radius: 999px;
-
-    padding: 9px 14px;
-
-    outline: none;
-}
-
-.comment-input input[type="text"]:focus {
-    border-color: #1d9bf0;
-}
-
-.comment-input .photo-button {
-    font-size: 18px;
-
-    white-space: nowrap;
-}
-
-.comment-input button.reply-button {
-    border: none;
-
-    background: #1d9bf0;
-
+.comment-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #555;
     color: white;
-
-    border-radius: 999px;
-
-    padding: 8px 15px;
-
-    cursor: pointer;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
     font-weight: bold;
 }
 
+.comment-text {
+    margin: 5px 0 0 38px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 
-/* =========================
-   COMMENTS
-========================= */
+.comment-image {
+    max-width: 80%;
+    max-height: 250px;
+    margin: 8px 0 0 38px;
+    border-radius: 10px;
+}
 
-.comment {
-    margin-top: 10px;
+.comment-form {
+    margin-top: 12px;
+}
 
-    background: #f1f3f5;
-
-    padding: 10px 12px;
-
-    border-radius: 12px;
-
+.comment-form textarea {
+    min-height: 50px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
     font-size: 14px;
 }
 
-.comment-username {
-    font-weight: bold;
-
-    margin-right: 5px;
+.comment-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
 }
 
-.reply-photo-preview {
-    margin-top: 8px;
+.reply-button {
+    border: none;
+    background: #111;
+    color: white;
+    padding: 7px 13px;
+    border-radius: 15px;
+    cursor: pointer;
 }
-
-
-/* =========================
-   DELETE
-========================= */
 
 .delete-button {
-    border: none;
-
     background: none;
-
-    color: #657786;
-
-    cursor: pointer;
-
-    font-size: 13px;
-}
-
-.delete-button:hover {
+    border: none;
     color: #e0245e;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: auto;
 }
 
+.empty {
+    text-align: center;
+    padding: 50px 20px;
+    color: #777;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #777;
+}
 
 /* =========================
    MOBILE
 ========================= */
 
-@media (max-width: 700px) {
-
-    body {
-        background: white;
-    }
+@media (max-width: 600px) {
 
     .app {
-        margin: 0;
-
         border: none;
     }
 
+    .post,
     .composer,
-    .post {
-        padding: 15px;
+    .header,
+    .username-box,
+    .status {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
-    textarea {
-        font-size: 18px;
-    }
-
-    .actions {
-        max-width: 100%;
-    }
-
-    .comment-input {
-        flex-wrap: wrap;
-    }
-
-    .comment-input input[type="text"] {
-        width: 100%;
-
-        flex-basis: 100%;
-    }
 }
-
 </style>
 </head>
 
-
 <body>
-
 
 <div class="app">
 
-
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <!-- HEADER -->
 
     <div class="header">
-
-        <h1>Home</h1>
-
+        <h2>Home</h2>
     </div>
 
+    <!-- CONNECTION STATUS -->
 
-    <!-- =========================
-         USERNAME
-    ========================== -->
+    <div
+        id="status"
+        class="status"
+    >
+        Connecting...
+    </div>
+
+    <!-- USERNAME -->
 
     <div class="username-box">
 
-        <label>
-            Choose your username
-        </label>
+        <label>Your Username</label>
 
         <div class="username-row">
 
             <input
-                id="usernameInput"
                 type="text"
-                maxlength="20"
+                id="usernameInput"
                 placeholder="Enter your username"
+                maxlength="30"
             >
 
             <button onclick="setUsername()">
-                Set
+                Save
             </button>
 
         </div>
@@ -637,1252 +448,1443 @@ textarea {
             class="current-user"
             id="currentUser"
         >
-            No username set yet.
+            Not set
         </div>
 
     </div>
 
-
-    <!-- =========================
-         CREATE POST
-    ========================== -->
+    <!-- CREATE POST -->
 
     <div class="composer">
 
+        <textarea
+            id="postInput"
+            placeholder="What's happening?"
+            maxlength="500"
+        ></textarea>
 
         <div
-            class="avatar"
-            id="myAvatar"
+            class="photo-preview"
+            id="postPhotoPreview"
         >
-            ?
+
+            <img
+                id="postPreviewImage"
+                alt="Preview"
+            >
+
+            <button
+                class="remove-photo"
+                onclick="removePostPhoto()"
+            >
+                Remove photo
+            </button>
+
         </div>
 
+        <div class="composer-bottom">
 
-        <div class="composer-content">
+            <label class="photo-label">
 
+                📷 Add Photo
 
-            <textarea
-                id="postInput"
-                maxlength="280"
-                placeholder="What's happening?"
-                oninput="updateCounter()"
-            ></textarea>
-
-
-            <!-- PHOTO BUTTON -->
-
-            <div class="media-options">
-
-                <label class="photo-button">
-
-                    📷 Photo
-
-                    <input
-                        type="file"
-                        id="postPhoto"
-                        accept="image/*"
-                        onchange="previewPostPhoto()"
-                        hidden
-                    >
-
-                </label>
-
-            </div>
-
-
-            <!-- PHOTO PREVIEW -->
-
-            <div id="postPhotoPreview"></div>
-
-
-            <div class="composer-bottom">
-
-                <span class="counter">
-
-                    <span id="counter">
-                        0
-                    </span>/280
-
-                </span>
-
-
-                <button
-                    class="post-button"
-                    id="postButton"
-                    onclick="createPost()"
-                    disabled
+                <input
+                    type="file"
+                    id="postPhoto"
+                    accept="image/*"
+                    onchange="previewPostPhoto()"
                 >
-                    Post
-                </button>
 
-            </div>
+            </label>
+
+            <button
+                class="post-button"
+                id="postButton"
+                onclick="createPost()"
+            >
+                Post
+            </button>
 
         </div>
 
     </div>
 
-
-    <!-- =========================
-         FEED
-    ========================== -->
+    <!-- FEED -->
 
     <div id="feed">
 
-
-        <!-- =========================
-             SAMPLE POST 1
-        ========================== -->
-
-        <div class="post">
-
-
-            <div class="avatar">
-                JZ
-            </div>
-
-
-            <div class="post-body">
-
-
-                <div class="post-header">
-
-                    <span class="name">
-                        Jayril Zia Panhilason
-                    </span>
-
-                    <span class="verified">
-                        ✓
-                    </span>
-
-                    <span class="username">
-                        @ikeepitjayreal
-                    </span>
-
-                    <span class="time">
-                        · 2h
-                    </span>
-
-                </div>
-
-
-                <div class="post-text">
-
-                    Sometimes the smallest moments become the memories we remember the most.
-
-                </div>
-
-
-                <div class="actions">
-
-
-                    <button
-                        class="action"
-                        onclick="toggleComment(this)"
-                    >
-                        💬 <span>3</span>
-                    </button>
-
-
-                    <button
-                        class="action"
-                        onclick="toggleRepost(this)"
-                    >
-                        🔁 <span>7</span>
-                    </button>
-
-
-                    <button
-                        class="action"
-                        onclick="toggleLike(this)"
-                    >
-                        ♡ <span>24</span>
-                    </button>
-
-
-                    <button class="action">
-                        ↗
-                    </button>
-
-
-                </div>
-
-
-                <!-- COMMENTS -->
-
-                <div class="comments">
-
-                    <div class="comment-input">
-
-
-                        <input
-                            type="text"
-                            placeholder="Post your reply..."
-                        >
-
-
-                        <label class="photo-button">
-
-                            📷
-
-                            <input
-                                type="file"
-                                accept="image/*"
-                                hidden
-                                onchange="selectReplyPhoto(this)"
-                            >
-
-                        </label>
-
-
-                        <button
-                            class="reply-button"
-                            onclick="addComment(this)"
-                        >
-                            Reply
-                        </button>
-
-
-                    </div>
-
-
-                    <div class="reply-photo-preview"></div>
-
-
-                </div>
-
-
-            </div>
-
+        <div class="loading">
+            Loading posts...
         </div>
-
-
-        <!-- =========================
-             SAMPLE POST 2
-        ========================== -->
-
-        <div class="post">
-
-
-            <div class="avatar">
-                AM
-            </div>
-
-
-            <div class="post-body">
-
-
-                <div class="post-header">
-
-                    <span class="name">
-                        Audrey Meagan Solomon
-                    </span>
-
-                    <span class="username">
-                        @an_dreyyy.tk
-                    </span>
-
-                    <span class="time">
-                        · 5h
-                    </span>
-
-                </div>
-
-
-                <div class="post-text">
-
-                    New day, new goals. Keep moving forward.
-
-                </div>
-
-
-                <div class="actions">
-
-
-                    <button
-                        class="action"
-                        onclick="toggleComment(this)"
-                    >
-                        💬 <span>5</span>
-                    </button>
-
-
-                    <button
-                        class="action"
-                        onclick="toggleRepost(this)"
-                    >
-                        🔁 <span>2</span>
-                    </button>
-
-
-                    <button
-                        class="action"
-                        onclick="toggleLike(this)"
-                    >
-                        ♡ <span>18</span>
-                    </button>
-
-
-                    <button class="action">
-                        ↗
-                    </button>
-
-
-                </div>
-
-
-                <!-- COMMENTS -->
-
-                <div class="comments">
-
-                    <div class="comment-input">
-
-
-                        <input
-                            type="text"
-                            placeholder="Post your reply..."
-                        >
-
-
-                        <label class="photo-button">
-
-                            📷
-
-                            <input
-                                type="file"
-                                accept="image/*"
-                                hidden
-                                onchange="selectReplyPhoto(this)"
-                            >
-
-                        </label>
-
-
-                        <button
-                            class="reply-button"
-                            onclick="addComment(this)"
-                        >
-                            Reply
-                        </button>
-
-
-                    </div>
-
-
-                    <div class="reply-photo-preview"></div>
-
-
-                </div>
-
-
-            </div>
-
-        </div>
-
 
     </div>
 
 </div>
 
 
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
 
-<script>
+<script type="module">
 
-/* =========================================================
-   CURRENT USER
-========================================================= */
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-let currentUsername = "";
+import {
+    getDatabase,
+    ref,
+    push,
+    set,
+    onValue,
+    update,
+    remove
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+import {
+    getStorage,
+    ref as storageRef,
+    uploadBytes,
+    getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
 
 
-/* =========================================================
-   SET USERNAME
-========================================================= */
+/* =====================================================
+   🔥 YOUR FIREBASE CONFIGURATION
+   REPLACE THESE VALUES WITH YOUR OWN
+===================================================== */
 
-function setUsername() {
+//
+const firebaseConfig = {
+  apiKey: "AIzaSyC2ubY7OMljthdGXd-u5y_sqG5vuY_HufQ",
+  authDomain: "communitea-eb2b8.firebaseapp.com",
+  databaseURL: "https://communitea-eb2b8-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  projectId: "communitea-eb2b8",
+  storageBucket: "communitea-eb2b8.firebasestorage.app",
+  messagingSenderId: "478656370103",
+  appId: "1:478656370103:web:c4ba49f31494dd6ded8432",
+  measurementId: "G-49K3EMD836"
+};
 
-    const input =
-        document.getElementById("usernameInput");
 
-    let username =
-        input.value.trim();
+/* =====================================================
+   INITIALIZE FIREBASE
+===================================================== */
 
+const app =
+    initializeApp(firebaseConfig);
+
+const database =
+    getDatabase(app);
+
+const storage =
+    getStorage(app);
+
+
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
+
+let currentUsername =
+    localStorage.getItem(
+        "404_currentUsername"
+    ) || "";
+
+let selectedPostFile = null;
+
+let selectedReplyFiles = {};
+
+let posts = {};
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const feed =
+    document.getElementById("feed");
+
+const status =
+    document.getElementById("status");
+
+const usernameInput =
+    document.getElementById("usernameInput");
+
+const currentUser =
+    document.getElementById("currentUser");
+
+const postButton =
+    document.getElementById("postButton");
+
+
+/* =====================================================
+   USERNAME
+===================================================== */
+
+function updateUsernameDisplay() {
+
+    if (currentUsername) {
+
+        currentUser.innerHTML =
+            `Logged in as <strong>@${escapeHTML(currentUsername)}</strong>`;
+
+        usernameInput.value =
+            currentUsername;
+
+    } else {
+
+        currentUser.textContent =
+            "Not set";
+
+    }
+
+}
+
+
+window.setUsername = function() {
+
+    const username =
+        usernameInput.value.trim();
 
     if (!username) {
 
-        alert("Please enter a username.");
+        alert(
+            "Please enter a username."
+        );
 
         return;
 
     }
-
-
-    /*
-       Remove spaces from username
-    */
-
-    username =
-        username.replace(/\s+/g, "");
-
 
     currentUsername =
         username;
 
-
-    document
-        .getElementById("currentUser")
-        .innerHTML =
-        "You are posting as <strong>@" +
-        escapeHTML(currentUsername) +
-        "</strong>";
-
-
-    /*
-       Change avatar initials
-    */
-
-    const avatar =
-        document.getElementById("myAvatar");
-
-
-    avatar.textContent =
+    localStorage.setItem(
+        "404_currentUsername",
         username
-        .substring(0, 2)
-        .toUpperCase();
+    );
+
+    updateUsernameDisplay();
+
+};
 
 
-    updateCounter();
+/* =====================================================
+   FIREBASE CONNECTION
+===================================================== */
 
-}
+const connectedRef =
+    ref(database, ".info/connected");
 
+onValue(
+    connectedRef,
+    (snapshot) => {
 
-/* =========================================================
-   CHARACTER COUNTER
-========================================================= */
+        if (snapshot.val() === true) {
 
-function updateCounter() {
+            status.textContent =
+                "● Connected — live feed";
 
-    const input =
-        document.getElementById("postInput");
+            status.className =
+                "status online";
 
-    const counter =
-        document.getElementById("counter");
+        } else {
 
-    const button =
-        document.getElementById("postButton");
+            status.textContent =
+                "● Offline";
 
+            status.className =
+                "status error";
 
-    counter.textContent =
-        input.value.length;
-
-
-    /*
-       Disable Post if:
-
-       - no username
-       - no text
-       - no photo
-    */
-
-    const hasText =
-        input.value.trim().length > 0;
-
-
-    const hasPhoto =
-        selectedPostPhoto !== "";
-
-
-    button.disabled =
-        currentUsername === "" ||
-        (!hasText && !hasPhoto);
-
-}
-
-
-/* =========================================================
-   POST PHOTO
-========================================================= */
-
-let selectedPostPhoto = "";
-
-
-function previewPostPhoto() {
-
-    const file =
-        document
-        .getElementById("postPhoto")
-        .files[0];
-
-
-    const preview =
-        document
-        .getElementById("postPhotoPreview");
-
-
-    if (!file) {
-
-        selectedPostPhoto = "";
-
-        preview.innerHTML = "";
-
-        updateCounter();
-
-        return;
+        }
 
     }
+);
 
 
-    /*
-       Only allow images
-    */
+/* =====================================================
+   REAL-TIME FEED
+===================================================== */
+
+const postsRef =
+    ref(database, "posts");
+
+onValue(
+    postsRef,
+    (snapshot) => {
+
+        posts =
+            snapshot.val() || {};
+
+        renderPosts();
+
+    },
+    (error) => {
+
+        console.error(error);
+
+        status.textContent =
+            "Database error";
+
+        status.className =
+            "status error";
+
+    }
+);
+
+
+/* =====================================================
+   POST PHOTO PREVIEW
+===================================================== */
+
+window.previewPostPhoto = function() {
+
+    const file =
+        document.getElementById(
+            "postPhoto"
+        ).files[0];
+
+    if (!file) return;
 
     if (!file.type.startsWith("image/")) {
 
-        alert("Please select an image.");
+        alert(
+            "Please choose an image."
+        );
 
         return;
 
     }
 
+    selectedPostFile =
+        file;
 
     const reader =
         new FileReader();
 
-
     reader.onload =
         function(event) {
 
-            selectedPostPhoto =
+            document.getElementById(
+                "postPreviewImage"
+            ).src =
                 event.target.result;
 
-
-            preview.innerHTML = `
-
-                <div class="photo-preview-container">
-
-                    <img
-                        src="${selectedPostPhoto}"
-                        class="photo-preview"
-                    >
-
-                    <button
-                        class="remove-photo"
-                        onclick="removePostPhoto()"
-                    >
-                        ×
-                    </button>
-
-                </div>
-
-            `;
-
-
-            updateCounter();
+            document.getElementById(
+                "postPhotoPreview"
+            ).style.display =
+                "block";
 
         };
 
-
     reader.readAsDataURL(file);
 
-}
+};
 
 
-/* =========================================================
-   REMOVE POST PHOTO
-========================================================= */
+window.removePostPhoto = function() {
 
-function removePostPhoto() {
+    selectedPostFile =
+        null;
 
-    selectedPostPhoto = "";
+    document.getElementById(
+        "postPhoto"
+    ).value =
+        "";
 
+    document.getElementById(
+        "postPhotoPreview"
+    ).style.display =
+        "none";
 
-    document
-        .getElementById("postPhoto")
-        .value = "";
-
-
-    document
-        .getElementById("postPhotoPreview")
-        .innerHTML = "";
-
-
-    updateCounter();
-
-}
+};
 
 
-/* =========================================================
+/* =====================================================
    CREATE POST
-========================================================= */
+===================================================== */
 
-function createPost() {
-
+window.createPost = async function() {
 
     if (!currentUsername) {
 
-        alert("Please set your username first.");
+        alert(
+            "Please enter your username first."
+        );
 
         return;
 
     }
 
-
     const input =
-        document.getElementById("postInput");
-
+        document.getElementById(
+            "postInput"
+        );
 
     const text =
         input.value.trim();
 
+    if (!text && !selectedPostFile) {
 
-    /*
-       A post must contain either:
+        alert(
+            "Write something or add a photo."
+        );
 
-       TEXT
-       or
-       PHOTO
-    */
+        return;
 
-    if (!text && !selectedPostPhoto) {
+    }
+
+    try {
+
+        postButton.disabled =
+            true;
+
+        postButton.textContent =
+            "Posting...";
+
+        let imageUrl =
+            "";
+
+        /* UPLOAD PHOTO */
+
+        if (selectedPostFile) {
+
+            const safeName =
+                selectedPostFile.name
+                    .replace(
+                        /[^a-zA-Z0-9._-]/g,
+                        "_"
+                    );
+
+            const filePath =
+                `posts/${Date.now()}_${safeName}`;
+
+            const imageRef =
+                storageRef(
+                    storage,
+                    filePath
+                );
+
+            await uploadBytes(
+                imageRef,
+                selectedPostFile
+            );
+
+            imageUrl =
+                await getDownloadURL(
+                    imageRef
+                );
+
+        }
+
+
+        /* CREATE DATABASE POST */
+
+        const newPostRef =
+            push(
+                postsRef
+            );
+
+        await set(
+            newPostRef,
+            {
+
+                username:
+                    currentUsername,
+
+                text:
+                    text,
+
+                image:
+                    imageUrl,
+
+                timestamp:
+                    Date.now(),
+
+                likes:
+                    0,
+
+                reposts:
+                    0
+
+            }
+        );
+
+
+        /* RESET */
+
+        input.value =
+            "";
+
+        removePostPhoto();
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+        alert(
+            "Something went wrong while posting.\n\n" +
+            error.message
+        );
+
+    }
+
+    finally {
+
+        postButton.disabled =
+            false;
+
+        postButton.textContent =
+            "Post";
+
+    }
+
+};
+
+
+/* =====================================================
+   RENDER POSTS
+===================================================== */
+
+function renderPosts() {
+
+    feed.innerHTML =
+        "";
+
+    const postEntries =
+        Object.entries(posts);
+
+    if (
+        postEntries.length === 0
+    ) {
+
+        feed.innerHTML = `
+            <div class="empty">
+                No posts yet.<br>
+                Be the first to post.
+            </div>
+        `;
 
         return;
 
     }
 
 
-    const post =
-        document.createElement("div");
+    /* NEWEST FIRST */
+
+    postEntries.sort(
+        (a, b) =>
+            (b[1].timestamp || 0)
+            -
+            (a[1].timestamp || 0)
+    );
 
 
-    post.className =
-        "post";
+    postEntries.forEach(
+        ([postId, post]) => {
+
+            const postElement =
+                document.createElement(
+                    "div"
+                );
+
+            postElement.className =
+                "post";
+
+            const username =
+                post.username ||
+                "Unknown";
+
+            const initials =
+                getInitials(username);
+
+            const likes =
+                Number(post.likes || 0);
+
+            const reposts =
+                Number(post.reposts || 0);
 
 
-    const initials =
-        currentUsername
-        .substring(0, 2)
-        .toUpperCase();
+            postElement.innerHTML = `
 
+                <div class="post-header">
 
-    post.innerHTML = `
+                    <div class="avatar">
+                        ${escapeHTML(initials)}
+                    </div>
 
-        <div class="avatar">
+                    <div>
 
-            ${escapeHTML(initials)}
+                        <span class="name">
+                            ${escapeHTML(username)}
+                        </span>
 
-        </div>
+                        <span class="username">
+                            @${escapeHTML(username)}
+                        </span>
 
-
-        <div class="post-body">
-
-
-            <div class="post-header">
-
-                <span class="name">
-
-                    ${escapeHTML(currentUsername)}
-
-                </span>
-
-
-                <span class="username">
-
-                    @${escapeHTML(currentUsername)}
-
-                </span>
-
-
-                <span class="time">
-
-                    · now
-
-                </span>
-
-            </div>
-
-
-            ${
-                text
-                ?
-                `
-                    <div class="post-text">
-
-                        ${escapeHTML(text)}
+                        <span class="post-time">
+                            ${formatTime(post.timestamp)}
+                        </span>
 
                     </div>
-                `
-                :
-                ""
-            }
-
-
-            ${
-                selectedPostPhoto
-                ?
-                `
-                    <img
-                        src="${selectedPostPhoto}"
-                        class="post-image"
-                    >
-                `
-                :
-                ""
-            }
-
-
-            <div class="actions">
-
-
-                <button
-                    class="action"
-                    onclick="toggleComment(this)"
-                >
-                    💬 <span>0</span>
-                </button>
-
-
-                <button
-                    class="action"
-                    onclick="toggleRepost(this)"
-                >
-                    🔁 <span>0</span>
-                </button>
-
-
-                <button
-                    class="action"
-                    onclick="toggleLike(this)"
-                >
-                    ♡ <span>0</span>
-                </button>
-
-
-                <button
-                    class="delete-button"
-                    onclick="deletePost(this)"
-                >
-                    Delete
-                </button>
-
-
-            </div>
-
-
-            <!-- COMMENTS -->
-
-            <div class="comments">
-
-
-                <div class="comment-input">
-
-
-                    <input
-                        type="text"
-                        placeholder="Post your reply..."
-                    >
-
-
-                    <label class="photo-button">
-
-                        📷
-
-                        <input
-                            type="file"
-                            accept="image/*"
-                            hidden
-                            onchange="selectReplyPhoto(this)"
-                        >
-
-                    </label>
-
 
                     <button
-                        class="reply-button"
-                        onclick="addComment(this)"
+                        class="delete-button"
+                        onclick="deletePost('${postId}')"
                     >
-                        Reply
+                        Delete
                     </button>
-
 
                 </div>
 
 
-                <div class="reply-photo-preview"></div>
-
-
-            </div>
-
-
-        </div>
-
-    `;
-
-
-    /*
-       Put newest post at the top
-    */
-
-    document
-        .getElementById("feed")
-        .prepend(post);
-
-
-    /*
-       Clear composer
-    */
-
-    input.value = "";
-
-
-    selectedPostPhoto = "";
-
-
-    document
-        .getElementById("postPhoto")
-        .value = "";
-
-
-    document
-        .getElementById("postPhotoPreview")
-        .innerHTML = "";
-
-
-    updateCounter();
-
-}
-
-
-/* =========================================================
-   LIKE
-========================================================= */
-
-function toggleLike(button) {
-
-
-    const number =
-        button.querySelector("span");
-
-
-    let count =
-        parseInt(number.textContent);
-
-
-    if (
-        button.classList
-        .contains("liked")
-    ) {
-
-
-        button.classList
-            .remove("liked");
-
-
-        count--;
-
-
-        button.innerHTML =
-            `♡ <span>${count}</span>`;
-
-
-    }
-
-    else {
-
-
-        button.classList
-            .add("liked");
-
-
-        count++;
-
-
-        button.innerHTML =
-            `♥ <span>${count}</span>`;
-
-
-    }
-
-}
-
-
-/* =========================================================
-   REPOST
-========================================================= */
-
-function toggleRepost(button) {
-
-
-    const number =
-        button.querySelector("span");
-
-
-    let count =
-        parseInt(number.textContent);
-
-
-    if (
-        button.classList
-        .contains("reposted")
-    ) {
-
-
-        button.classList
-            .remove("reposted");
-
-
-        count--;
-
-
-    }
-
-    else {
-
-
-        button.classList
-            .add("reposted");
-
-
-        count++;
-
-
-    }
-
-
-    number.textContent =
-        count;
-
-}
-
-
-/* =========================================================
-   SHOW COMMENTS
-========================================================= */
-
-function toggleComment(button) {
-
-
-    const post =
-        button.closest(".post");
-
-
-    const comments =
-        post.querySelector(".comments");
-
-
-    comments.classList
-        .toggle("show");
-
-}
-
-
-/* =========================================================
-   REPLY PHOTO
-========================================================= */
-
-function selectReplyPhoto(input) {
-
-
-    const file =
-        input.files[0];
-
-
-    if (!file) {
-
-        return;
-
-    }
-
-
-    if (!file.type.startsWith("image/")) {
-
-        alert("Please select an image.");
-
-        return;
-
-    }
-
-
-    const container =
-        input.closest(".comments");
-
-
-    const preview =
-        container.querySelector(
-            ".reply-photo-preview"
-        );
-
-
-    const reader =
-        new FileReader();
-
-
-    reader.onload =
-        function(event) {
-
-
-            /*
-               Store photo directly
-               on the file input
-            */
-
-            input.dataset.photo =
-                event.target.result;
-
-
-            preview.innerHTML = `
-
-                <div class="photo-preview-container">
-
+                ${
+                    post.text
+                    ?
+                    `
+                    <div class="post-text">
+                        ${escapeHTML(post.text)}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    post.image
+                    ?
+                    `
                     <img
-                        src="${event.target.result}"
-                        class="photo-preview"
+                        class="post-image"
+                        src="${escapeHTML(post.image)}"
+                        alt="Post image"
                     >
+                    `
+                    :
+                    ""
+                }
+
+
+                <div class="actions">
 
                     <button
-                        class="remove-photo"
-                        onclick="removeReplyPhoto(this)"
+                        class="action-btn"
+                        onclick="toggleComment('${postId}')"
                     >
-                        ×
+                        💬
+                        <span id="comment-count-${postId}">
+                            0
+                        </span>
                     </button>
+
+
+                    <button
+                        class="action-btn"
+                        id="repost-${postId}"
+                        onclick="toggleRepost('${postId}')"
+                    >
+                        🔁 ${reposts}
+                    </button>
+
+
+                    <button
+                        class="action-btn"
+                        id="like-${postId}"
+                        onclick="toggleLike('${postId}')"
+                    >
+                        ❤️ ${likes}
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="comments"
+                    id="comments-${postId}"
+                >
+
+                    <div
+                        id="comment-list-${postId}"
+                    >
+                        Loading replies...
+                    </div>
+
+
+                    <div class="comment-form">
+
+                        <textarea
+                            id="comment-input-${postId}"
+                            placeholder="Reply to this post..."
+                            maxlength="300"
+                        ></textarea>
+
+
+                        <div class="comment-bottom">
+
+                            <label class="photo-label">
+
+                                📷
+
+                                <input
+                                    type="file"
+                                    id="reply-photo-${postId}"
+                                    accept="image/*"
+                                    onchange="selectReplyPhoto('${postId}')"
+                                >
+
+                            </label>
+
+
+                            <button
+                                class="reply-button"
+                                onclick="addComment('${postId}')"
+                            >
+                                Reply
+                            </button>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
             `;
 
-        };
+
+            feed.appendChild(
+                postElement
+            );
 
 
-    reader.readAsDataURL(file);
+            loadComments(
+                postId
+            );
 
-}
-
-
-/* =========================================================
-   REMOVE REPLY PHOTO
-========================================================= */
-
-function removeReplyPhoto(button) {
-
-
-    const container =
-        button.closest(".comments");
-
-
-    const fileInput =
-        container.querySelector(
-            'input[type="file"]'
-        );
-
-
-    fileInput.value = "";
-
-
-    delete fileInput.dataset.photo;
-
-
-    container.querySelector(
-        ".reply-photo-preview"
-    ).innerHTML = "";
+        }
+    );
 
 }
 
 
-/* =========================================================
-   ADD COMMENT / REPLY
-========================================================= */
+/* =====================================================
+   LIKE
+===================================================== */
 
-function addComment(button) {
-
-
-    /*
-       User must have username
-    */
+window.toggleLike = async function(
+    postId
+) {
 
     if (!currentUsername) {
 
-        alert("Please set your username first.");
+        alert(
+            "Set your username first."
+        );
+
+        return;
+
+    }
+
+    const post =
+        posts[postId];
+
+    if (!post) return;
+
+
+    const likeKey =
+        btoa(
+            currentUsername
+        )
+        .replace(
+            /[^a-zA-Z0-9]/g,
+            ""
+        );
+
+
+    const likeRef =
+        ref(
+            database,
+            `posts/${postId}/likedBy/${likeKey}`
+        );
+
+
+    const likeSnapshot =
+        await new Promise(
+            resolve => {
+
+                onValue(
+                    likeRef,
+                    resolve,
+                    {
+                        onlyOnce: true
+                    }
+                );
+
+            }
+        );
+
+
+    const currentlyLiked =
+        likeSnapshot.exists();
+
+
+    if (currentlyLiked) {
+
+        await remove(
+            likeRef
+        );
+
+        await update(
+            ref(
+                database,
+                `posts/${postId}`
+            ),
+            {
+                likes:
+                    Math.max(
+                        0,
+                        Number(post.likes || 0) - 1
+                    )
+            }
+        );
+
+    } else {
+
+        await set(
+            likeRef,
+            true
+        );
+
+        await update(
+            ref(
+                database,
+                `posts/${postId}`
+            ),
+            {
+                likes:
+                    Number(post.likes || 0) + 1
+            }
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   REPOST
+===================================================== */
+
+window.toggleRepost = async function(
+    postId
+) {
+
+    if (!currentUsername) {
+
+        alert(
+            "Set your username first."
+        );
+
+        return;
+
+    }
+
+    const post =
+        posts[postId];
+
+    if (!post) return;
+
+
+    const repostKey =
+        btoa(
+            currentUsername
+        )
+        .replace(
+            /[^a-zA-Z0-9]/g,
+            ""
+        );
+
+
+    const repostRef =
+        ref(
+            database,
+            `posts/${postId}/repostedBy/${repostKey}`
+        );
+
+
+    const snapshot =
+        await new Promise(
+            resolve => {
+
+                onValue(
+                    repostRef,
+                    resolve,
+                    {
+                        onlyOnce: true
+                    }
+                );
+
+            }
+        );
+
+
+    const currentlyReposted =
+        snapshot.exists();
+
+
+    if (currentlyReposted) {
+
+        await remove(
+            repostRef
+        );
+
+        await update(
+            ref(
+                database,
+                `posts/${postId}`
+            ),
+            {
+                reposts:
+                    Math.max(
+                        0,
+                        Number(post.reposts || 0) - 1
+                    )
+            }
+        );
+
+    } else {
+
+        await set(
+            repostRef,
+            true
+        );
+
+        await update(
+            ref(
+                database,
+                `posts/${postId}`
+            ),
+            {
+                reposts:
+                    Number(post.reposts || 0) + 1
+            }
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+window.toggleComment = function(
+    postId
+) {
+
+    const box =
+        document.getElementById(
+            `comments-${postId}`
+        );
+
+    if (!box) return;
+
+    if (
+        box.style.display ===
+        "block"
+    ) {
+
+        box.style.display =
+            "none";
+
+    } else {
+
+        box.style.display =
+            "block";
+
+    }
+
+};
+
+
+window.selectReplyPhoto = function(
+    postId
+) {
+
+    const input =
+        document.getElementById(
+            `reply-photo-${postId}`
+        );
+
+    if (
+        input &&
+        input.files[0]
+    ) {
+
+        selectedReplyFiles[postId] =
+            input.files[0];
+
+    }
+
+};
+
+
+window.addComment = async function(
+    postId
+) {
+
+    if (!currentUsername) {
+
+        alert(
+            "Set your username first."
+        );
 
         return;
 
     }
 
 
-    const container =
-        button.closest(".comments");
-
-
-    /*
-       Find text input
-    */
-
-    const textInput =
-        container.querySelector(
-            'input[type="text"]'
+    const input =
+        document.getElementById(
+            `comment-input-${postId}`
         );
-
-
-    /*
-       Find photo input
-    */
-
-    const photoInput =
-        container.querySelector(
-            'input[type="file"]'
-        );
-
 
     const text =
-        textInput.value.trim();
+        input.value.trim();
+
+    const file =
+        selectedReplyFiles[postId];
 
 
-    const photo =
-        photoInput.dataset.photo || "";
+    if (!text && !file) {
 
-
-    /*
-       Need either text or photo
-    */
-
-    if (!text && !photo) {
+        alert(
+            "Write a reply or add a photo."
+        );
 
         return;
 
     }
 
 
-    /*
-       Create comment
-    */
+    try {
 
-    const comment =
-        document.createElement("div");
+        let imageUrl =
+            "";
 
 
-    comment.className =
-        "comment";
+        /* UPLOAD REPLY PHOTO */
 
+        if (file) {
 
-    comment.innerHTML = `
+            const safeName =
+                file.name.replace(
+                    /[^a-zA-Z0-9._-]/g,
+                    "_"
+                );
 
+            const filePath =
+                `comments/${Date.now()}_${safeName}`;
 
-        <div>
+            const imageRef =
+                storageRef(
+                    storage,
+                    filePath
+                );
 
-            <span class="comment-username">
+            await uploadBytes(
+                imageRef,
+                file
+            );
 
-                @${escapeHTML(currentUsername)}
+            imageUrl =
+                await getDownloadURL(
+                    imageRef
+                );
 
-            </span>
-
-
-            ${escapeHTML(text)}
-
-        </div>
-
-
-        ${
-            photo
-            ?
-            `
-                <img
-                    src="${photo}"
-                    class="post-image"
-                >
-            `
-            :
-            ""
         }
 
-    `;
+
+        const commentsRef =
+            ref(
+                database,
+                `posts/${postId}/comments`
+            );
 
 
-    /*
-       Put reply underneath
-    */
-
-    container.appendChild(comment);
-
-
-    /*
-       Clear inputs
-    */
-
-    textInput.value = "";
+        const newCommentRef =
+            push(
+                commentsRef
+            );
 
 
-    photoInput.value = "";
+        await set(
+            newCommentRef,
+            {
 
+                username:
+                    currentUsername,
 
-    delete photoInput.dataset.photo;
+                text:
+                    text,
 
+                image:
+                    imageUrl,
 
-    container.querySelector(
-        ".reply-photo-preview"
-    ).innerHTML = "";
+                timestamp:
+                    Date.now()
 
-
-    /*
-       Increase comment number
-    */
-
-    const post =
-        button.closest(".post");
-
-
-    const commentButton =
-        post.querySelector(
-            ".action"
+            }
         );
 
 
-    const number =
-        commentButton.querySelector(
-            "span"
+        input.value =
+            "";
+
+        document.getElementById(
+            `reply-photo-${postId}`
+        ).value =
+            "";
+
+        delete selectedReplyFiles[
+            postId
+        ];
+
+
+        document.getElementById(
+            `comments-${postId}`
+        ).style.display =
+            "block";
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+        alert(
+            "Could not send reply.\n\n" +
+            error.message
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   LOAD COMMENTS
+===================================================== */
+
+function loadComments(
+    postId
+) {
+
+    const commentsRef =
+        ref(
+            database,
+            `posts/${postId}/comments`
         );
 
 
-    number.textContent =
-        parseInt(number.textContent) + 1;
+    onValue(
+        commentsRef,
+        snapshot => {
+
+            const comments =
+                snapshot.val() || {};
+
+            const entries =
+                Object.entries(
+                    comments
+                );
+
+
+            const list =
+                document.getElementById(
+                    `comment-list-${postId}`
+                );
+
+            const count =
+                document.getElementById(
+                    `comment-count-${postId}`
+                );
+
+
+            if (!list) return;
+
+
+            if (count) {
+
+                count.textContent =
+                    entries.length;
+
+            }
+
+
+            if (
+                entries.length === 0
+            ) {
+
+                list.innerHTML = `
+                    <div style="
+                        color:#888;
+                        font-size:13px;
+                        padding:8px 0;
+                    ">
+                        No replies yet.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            entries.sort(
+                (a,b) =>
+                    (a[1].timestamp || 0)
+                    -
+                    (b[1].timestamp || 0)
+            );
+
+
+            list.innerHTML =
+                entries.map(
+                    ([commentId, comment]) => {
+
+                        return `
+
+                            <div class="comment">
+
+                                <div class="comment-header">
+
+                                    <div class="comment-avatar">
+                                        ${escapeHTML(
+                                            getInitials(
+                                                comment.username || "?"
+                                            )
+                                        )}
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            ${escapeHTML(
+                                                comment.username || "Unknown"
+                                            )}
+                                        </strong>
+
+                                        <span class="username">
+                                            @${escapeHTML(
+                                                comment.username || "unknown"
+                                            )}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                ${
+                                    comment.text
+                                    ?
+                                    `
+                                    <div class="comment-text">
+                                        ${escapeHTML(
+                                            comment.text
+                                        )}
+                                    </div>
+                                    `
+                                    :
+                                    ""
+                                }
+
+
+                                ${
+                                    comment.image
+                                    ?
+                                    `
+                                    <img
+                                        class="comment-image"
+                                        src="${escapeHTML(
+                                            comment.image
+                                        )}"
+                                        alt="Reply image"
+                                    >
+                                    `
+                                    :
+                                    ""
+                                }
+
+                            </div>
+
+                        `;
+
+                    }
+                ).join("");
+
+        }
+    );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    DELETE POST
-========================================================= */
+===================================================== */
 
-function deletePost(button) {
-
+window.deletePost = async function(
+    postId
+) {
 
     const post =
-        button.closest(".post");
+        posts[postId];
+
+    if (!post) return;
 
 
-    post.remove();
+    /*
+       For this simple school-project version,
+       anyone can press Delete.
+
+       If you want ONLY YOU to be able to delete
+       posts, we can add Firebase Authentication
+       and an admin account.
+    */
+
+    const confirmed =
+        confirm(
+            "Delete this post permanently?"
+        );
+
+    if (!confirmed) return;
+
+
+    try {
+
+        await remove(
+            ref(
+                database,
+                `posts/${postId}`
+            )
+        );
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+        alert(
+            "Could not delete the post."
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   UTILITIES
+===================================================== */
+
+function getInitials(
+    name
+) {
+
+    const parts =
+        String(name)
+            .trim()
+            .split(/\s+/);
+
+
+    if (
+        parts.length === 1
+    ) {
+
+        return parts[0]
+            .substring(0,2)
+            .toUpperCase();
+
+    }
+
+
+    return (
+        parts[0][0] +
+        parts[parts.length - 1][0]
+    ).toUpperCase();
 
 }
 
 
-/* =========================================================
-   SECURITY
-========================================================= */
+function formatTime(
+    timestamp
+) {
 
-function escapeHTML(text) {
+    if (!timestamp) {
+        return "";
+    }
 
-
-    const div =
-        document.createElement("div");
-
-
-    div.textContent =
-        text;
+    const date =
+        new Date(timestamp);
 
 
-    return div.innerHTML;
+    return date.toLocaleString(
+        undefined,
+        {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit"
+        }
+    );
 
 }
+
+
+function escapeHTML(
+    text
+) {
+
+    return String(text || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+updateUsernameDisplay();
 
 </script>
 
-
 </body>
-
 </html>
